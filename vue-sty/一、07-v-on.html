@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+
+		<!-- 	<button v-on:click="sub">-</button> -->
+		<!-- @click是v-on:click的简写 (语法糖:简写) -->
+		<h1>v-on基本用法</h1>
+		<div id="app-2">
+			<h2>当前数量:{{message}}</h2>
+			<button v-on:click="add">+</button>
+			<button @click="sub">-</button>
+		</div>
+
+		<h1>v-on传参</h1>
+		<!-- 如果监听不需要传参数的话,v-on:click="add()",后面的小括号可以省略. -->
+		<div id="app3" style="margin-top: 40px;">
+			<p>1.事件调用时没有参数</p>
+			<button @click="btn1click">按钮1</button><br />
+			<p>2.事件定义时,写函数时省略了小括号,但是方法本身是需要传参的.这时vue会默认将浏览器的event事件对象作为参数传入到方法.<br />
+				特殊情形可使用</p>
+			<button @click="btn2click">按钮2</button><br />
+			<p>3.需要event参数,同时也需要其他参数.手动获取浏览器的event使用:$event</p>
+			<button @click="btn3click(123, $event)">按钮3</button><br />
+			<!-- 	<button @click="btn3click(abc, $event)">按钮3</button><br />
+				如果是abc,那就说明传的是变量.那就会找变量 -->
+		</div>
+
+		<h1>v-on的修饰符</h1>
+		<div id="app4">
+			<p>1. .stop 阻止冒泡</p>
+			<div @click="divclick">
+				aaaa
+				<button @click.stop="btnclick">阻止冒泡按钮</button>
+			</div>
+			<p>2. .prevent阻止默认行,可手动调用</p>
+			<form action="111">
+				<input value="name" />
+				<input value="提交" type="submit" @click.prevent="submitclick" />
+			</form>
+			<p>3. 监听键盘的键帽</p>
+			<p>3.1 监听所有键帽</p>
+			<input type="text" @keyup="keyup()" />
+			<p>3.2 监听enter键</p>
+			<input type="text" @keyup.enter="keyupenter()" />
+			<p>4. .once只让点击一次</p>
+			<button @click.once="onceclick">只有第一次点击才有反应</button>
+		</div>
+		<script>
+			// 基本
+			var app2 = new Vue({
+				el: '#app-2',
+				data: {
+					message: 0
+				},
+				methods: { //定义方法,可定义很多函数
+					add() {
+						this.message++
+					},
+					sub() {
+						this.message--
+					}
+				}
+			})
+			// v-on 传参
+			var app3 = new Vue({
+				el: '#app3',
+				data: {
+					abc: 456,
+				},
+				methods: {
+					btn1click() {
+						console.log('btn1click')
+					},
+					btn2click(event) {
+						console.log('000', event)
+					},
+					btn3click(abc, event) {
+						console.log('+++', abc, event)
+					}
+				}
+
+			})
+			//修饰符
+			const app4 = new Vue({
+				el: '#app4',
+				methods: {
+					divclick() {
+						console.log('divclick')
+					},
+					btnclick() {
+						console.log('btnclick')
+					},
+					submitclick() {
+						console.log('submitclick')
+					},
+					keyup() {
+						console.log('监听每一次键盘的弹起')
+					},
+					keyupenter() {
+						console.log('按了enter')
+					},
+					onceclick() {
+						console.log('只有第一次点击才有反应enter')
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

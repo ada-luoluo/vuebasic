@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+
+		<div id="app">
+			<!-- <cpn v-show="isshow"></cpn> -->
+			<cpn></cpn>
+
+			<!-- 这里的内容是可以展示出来的,因为是在#APP的vue实例中,在他的作用于里面找isshow,为true -->
+			<!-- 			<cpn v-for="item in message"></cpn> -->
+			<!-- 这里的message是vue实力的message -->
+		</div>
+		<template id="cpn">
+			<div v-show="isshow">
+				<!-- 这里的isshow是不显示的,因为找的是cpn里面的isshow,在组件的作用里面的isshow: false -->
+				<h2>标题</h2>
+				<p>内容</p>
+			</div>
+		</template>
+
+
+		<script>
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message: 'Hello Vue!',
+					isshow: true
+				},
+
+				components: {
+					cpn: {
+						template: '#cpn',
+						data() {
+							return {
+								isshow: false
+							}
+						}
+					}
+
+				}
+			})
+		</script>
+	</body>
+</html>

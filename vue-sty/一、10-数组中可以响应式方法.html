@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			.active {
+				color: #ff0000;
+			}
+
+			li {
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div id="app">
+			<ul>
+				<li v-for="item in infolist">
+					{{item}}
+				</li>
+			</ul>
+			<button type="button" @click="btnclick()">按钮</button>
+		</div>
+		<script>
+			const app = new Vue({
+				el: "#app",
+				data: {
+					infolist: ['info-1', 'info-3', 'info-2', 'info-4', 'info-5'],
+				},
+				methods: {
+					btnclick() {
+						
+						// 数组中的响应式方法
+						//1. push() 从最后面开始追加元素
+						//this.infolist.push('aaa'); 追加一个
+						//this.infolist.push('aaa', 'bbb', 'ccc'); 追加多个
+						//2. pop() 删除数组中的最后一个元素
+						//this.infolist.pop()
+						//3. shift() 删除数组中的第一个元素
+						//this.infolist.shift()
+						//4. unshift() 在数组的最前面添加元素 添加一个和多个都可以
+						//this.infolist.unshift('aaa')
+						//this.infolist.unshift('aaa', 'bbb')
+						//5. splice()  删除/插入/替换元素 (第一个参数,表示从第几个元素开始起操作,最重要是看2个参数是什么)
+						//this.infolist.splice(1) // 删除元素: 只有一个参数,表示从第一个元素后开始删除,一直删除到最后.
+						//this.infolist.splice(1, 2) //删除元素: 后面第二个参数如果传了几,就表示要删除几个元素,表示从第一个元素后,删除2个元素
+						//this.infolist.splice(1, 2, "info-6", "info-7", "info-8")//替换元素: 第二个参数是2,表示从第1个元素后面,删除2个元素,然后将6,7,8替换上去
+						//this.infolist.splice(1, 0, "info-10", "info-11") //插入元素: 如果第二个参数是0,表示什么都不删,从第一个元素后面插入10,11
+						//06. sort() 做有序排序
+						// this.infolist.sort()	
+						//07. reverse 翻转 最后变最前
+						//this.infolist.reverse()
+						//08. vue set(要修改的对象,索引值,修改后的值)
+						Vue.set(this.infolist, 0, 'bbbb')
+					}
+				}
+			})
+		</script>
+
+	</body>
+</html>

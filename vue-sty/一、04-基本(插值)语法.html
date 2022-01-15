@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- demo-1 mustcahe-->
+		<div id="app">
+			<!-- mustache就是{{}}, 在这里不仅可以写变量,也可以写简单的表达式. mustache只能用于内容,不能用于标签的属性.-->
+			{{message}}
+			<p>{{firstname + lastname}}</p>
+			<p>{{firstname + ' ' +lastname}}</p>
+			<p>{{firstname}} {{lastname}}</p>
+			<h2>{{counter * 2}}</h2>
+		</div>
+
+		<!--demo-2  v-once-->
+		<div id="app2">
+			<h2>{{message}}</h2>
+			<h2 v-once>{{message}}</h2>
+			<!-- v-once 不会随着数据改变而改变 就是简单的指令 后面不需要更东西-->
+		</div>
+
+		<!--demo-3  v-html-->
+		<div id="app3">
+			<h2>{{message}}</h2>
+			<p v-html="url"></p>
+			<!-- 	v-html 将返回的数据已HTML标签展示 -->
+		</div>
+		<!--demo-4  v-text-->
+		<div id="app4">
+			<h2 v-text="message"></h2>
+			<!-- v-text 直接展示文本 一般不用,不够灵活-->
+		</div>
+
+		<!--demo-5  v-pre-->
+		<div id="app5">
+			<h2 v-pre>{{newmessage}}</h2>
+			<!-- v-pre 将内容原封不动的显示,不做任何解析 -->
+		</div>
+
+		<!--demo-5  v-cloak-->
+		<div id="app6" v-cloak>
+			<h2>{{message}}</h2>
+		</div>
+
+		<script src="js/vue.js"></script>
+		<script>
+			// demo-1 mustcahe
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message: '你好',
+					firstname: 'luo',
+					lastname: 'ada',
+					counter: 100
+				}
+			})
+			// demo-2	v-once
+			var app2 = new Vue({
+				el: '#app2',
+				data: {
+					message: '你好',
+				}
+			})
+			// demo-3	v-html
+			var app3 = new Vue({
+				el: '#app3',
+				data: {
+					message: '你好',
+					url: '<a href="https://www.baidu.com/">百度一下</a>'
+				}
+			})
+			// demo-4	v-html
+			var app4 = new Vue({
+				el: '#app4',
+				data: {
+					message: 'demo-4 v-text',
+				}
+			})
+			// demo-5	v-pre
+			var app5 = new Vue({
+				el: '#app5',
+				data: {
+					newmessage: 'v-pre'
+				}
+			})
+
+			// demo-6	v-cloak  cloak:斗篷
+			// 在vue解析之前 有v-cloak的属性,解析之后就移除v-cloak.
+			//样式给了display:none.表示解析之前div什么都不显示,解析之后才显示相应的内容.
+				var app6 = new Vue({
+				el: '#app6',
+				data: {
+					message: 'demo-6	v-cloak'
+				}
+			})
+		</script>
+
+
+	</body>
+</html>

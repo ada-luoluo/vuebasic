@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<H2>promise就是对一步操作进行封装</H2>
+
+<script>
+    //1.使用settimeout
+    // setTimeout(() => {
+    //    console.log('hello world')
+    // },1000)
+     // Promise函数有2个参数,这两个参数本身又是函数
+    // new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //     console.log('hello world')
+    // },1000)
+    // })
+
+
+    new Promise((resolve, reject) => {
+        setTimeout(() => {
+       // resolve("hello") //一旦使用了resolve,立马会去回调then  所以resolve和then是配套使用的
+          reject('error message') //使用了reject,立马会调用catch  reject和catch是配套的
+    },1000)
+    }).then((data) => {
+     console.log(data)
+    }).catch((data) => {
+        console.log(data)
+    })
+
+    //并且Promise里面可以嵌套使用Promise
+    new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve("hello")
+         },1000)
+    }).then((data) => {
+        console.log(data)
+        return new Promise((resolve, reject) =>{
+            resolve("aaa")
+        })
+    }).then((data) =>{
+        console.log(data)
+    })
+
+
+
+    // premise的另外一种写法
+    new Promise((resolve, reject) =>{
+      //resolve('hellobb')
+        reject('errorbb')
+    }).then(data =>{  //then里面可以传2个函数, 如果resolve调用函数1,
+      console.log(data)
+    }, err => { // reject调用函数2
+        console.log(err)
+    })
+
+</script>
+
+</body>
+</html>

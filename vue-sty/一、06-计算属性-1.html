@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 01.mustache -->
+			<h3>{{firstName + ' ' + lastName}}</h3>
+			<!--02. methods -->
+			<h3>{{getfullName()}}</h3>
+
+			<!-- 03.计算属性  computed 计算属性 把fullName当做属性去使用,不需要()-->
+			<h3>{{fullName}}</h3>
+		</div>
+
+
+		<div id="app2">
+			<h2>书的总价是:{{totalprice}}</h2>
+		</div>
+
+
+
+		<script>
+			// 计算属性基本操作
+			var app = new Vue({
+				el: '#app',
+				data: {
+					firstName: 'Domoto',
+					lastName: 'Tsuyoshi'
+				},
+				computed: {
+					fullName: function() {
+						return this.firstName + ' ' + this.lastName
+					}
+				},
+
+				methods: {
+					getfullName: function() {
+						return this.firstName + ' ' + this.lastName
+					},
+
+				}
+			})
+
+			// 计算属性复杂操作
+			var app2 = new Vue({
+				el: '#app2',
+				data: {
+					books: [{
+							id: 001,
+							name: '日语初级',
+							price: 56
+						},
+						{
+							id: 002,
+							name: '日语中级',
+							price: 68
+						},
+						{
+							id: 003,
+							name: '日语高级',
+							price: 80
+						}
+					]
+				},
+				computed: {
+					totalprice: function() {
+						let result = 0
+						for (let i = 0; i < this.books.length; i++) {
+							result += this.books[i].price
+						}
+						return result
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

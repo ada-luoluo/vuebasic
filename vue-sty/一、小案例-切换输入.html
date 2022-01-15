@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<span v-if="isShow">
+				<label for="user">User:</label>  
+				<input type="text" id="user" key="user" />
+				<!-- laber里面的for与input里面的ID是对应的, 这样的话,点击for时,input也变成了输入状态-->
+			</span>
+		 <span v-else>
+			 <label for="email">Email:</label>
+			 <input type="text" id="email" key="email" />
+		 </span>
+		 <button @click="isShow = !isShow">切换类型</button> <!-- 取反 -->
+		</div>
+		<p>Tips:input框中加入key,可防止input内容被复用.如果key内容一样则可以复用,内容不一样,则不可被复用</p>
+	
+	<script>
+
+		var app = new Vue({
+		  el: '#app', 
+		  data: { 
+		    message: 'Hello Vue!',
+				isShow: true
+		  }
+		})
+		
+	</script>
+	</body>
+</html>

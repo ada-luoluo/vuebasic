@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+
+		<div id="app">
+			<cpn>
+				<template slot-scope="aaa"><!-- 这里的aaa名字可以随便取 -->
+					<span>{{aaa.data.join('/')}}</span>
+				</template>
+			</cpn>
+			<cpn>
+				<!-- 父组件拿到plang的数据 -->
+				<template slot-scope="slot">
+					<!-- 	这是v-for的写法
+				<span v-for="item in slot.data">
+						{{item}} -
+					</span> -->
+
+					<!-- 这是mustcahe的写法,使用join()讲数组转为字符串,以-链接 -->
+					<span>{{slot.data.join('-')}}</span>
+				</template>
+
+			</cpn>
+			<!-- <cpn>
+				<span>java -</span>
+				<span>c++ -</span>
+			</cpn> -->
+			<!-- 现在cpn想改变排列方式,不可能直接写死在里面,所以必须拿到子组件里面的plang -->
+			<cpn></cpn> <!-- 默认 -->
+
+		</div>
+
+		<template id="cpn">
+			<div>
+				<slot :data="plang">	<!-- 这里的:data,'data'也可以随便取 :bbbd="plang" 都可以 -->
+				<ul>
+						<li v-for="item in plang">{{item}}</li>
+					</ul>
+				</slot>
+				<!-- 加了插槽,cpn里面就可以改变自己的内容,如什么都不加就用默认,加了就用加的内容替换 -->
+			</div>
+		</template>
+
+
+		<script>
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message: 'Hello Vue!',
+					isshow: true
+				},
+
+				components: {
+					cpn: {
+						template: '#cpn',
+						data() {
+							return {
+								plang: ['jave', 'c++', 'c#']
+							}
+						}
+					}
+
+				}
+			})
+		</script>
+	</body>
+</html>

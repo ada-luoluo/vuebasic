@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<h1>父传子 要用props</h1>
+		
+		<div id="app">
+			<!-- 使用时,必须使用 v-bind -->
+			<cpn v-bind:childmovices="movices" :childmessage="message"> </cpn>
+		<!-- v-bind不支持使用驼峰标识,不需要使用-隔开,然后大写改小写 例如: 	childMyMessage  改成child-my-message-->
+			<cpn :child-my-message="message"> </cpn>
+			
+		</div>
+
+		<template id="cpn">
+			<div>
+				<ul>
+					<li v-for="item in childmovices">
+						{{item}}
+					</li>
+				</ul>
+				<h2>{{childmessage}}</h2>
+				<h2>{{childMyMessage}}</h2>
+			</div>
+		</template>
+
+		<script>
+			//以下是注册组件的增强写法
+			//全局组件为子组件
+			const cpn = {
+				template: '#cpn',
+				//	props: ['childmovices', 'childmessage'], //用数组的形式传递
+				props: {
+
+					//1. 限制类型
+					childmovices: Array, //要求传的的数据必须是数组
+					childmessage: String ,//要求必须是String
+
+					//2. 提供默认值及必传值
+					// childmessage: {
+					// 	type: String,
+					// 	default: 'aaaa', //默认值,如果没有传数据就使用默认值
+					// 	required: true // 为true时为必传
+					// },
+					//对象或者数组的默认值,必须是函数
+					// childmovices: {
+					// 	type: Array,
+					// 	default () {
+					// 		return []
+					// 	}
+					// },
+					
+					// childMyMessage: {
+					// 	type: String,
+					// },
+					
+				}
+			}
+
+			// VUE实力为父组件
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message: 'Hello Vue!',
+					movices: ['aaa', 'bbb', 'cccc']
+				},
+				components: {
+					cpn
+				}
+			})
+		</script>
+	</body>
+</html>

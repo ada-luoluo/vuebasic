@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+
+		<h1>条件判断</h1>
+		<br>
+		<h1>v-if的使用</h1>
+		<!-- 满足条件是显示, 如果为true时显示aaa等,为false显示FFFF-->
+		<div id="app">
+			<div v-if="isShow">
+				<div>aaa</div>
+				<div>bbb</div>
+				<div>ccc</div>
+			</div>
+			<h3 v-else>FFFF</h3>
+
+			<h1>v-if和 v-else-if</h1>
+			<p>如果条件很复杂时,不建议使用v-else-if,可以使用计算属性</p>
+			<div>
+				<h3 v-if="scort>=90">优秀</h3>
+				<h3 v-else-if="scort>=80">良好</h3>
+				<h3 v-else-if="scort>=60">及格</h3>
+				<h3 v-else>不及格</h3>
+			</div>
+			<!-- 计算属性 -->
+			<h4>{{result}}</h4>
+
+		</div>
+		<script>
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message: 'Hello Vue!',
+					isShow: false,
+					scort: 44
+				},
+				computed: { //使用计算属性
+					result() { //{{}}里面使用result
+						let finalmessage = '';
+						if (this.scort >= 90) {
+							finalmessage = '优秀'
+						} else if (this.scort >= 80) {
+							finalmessage = '良好'
+						} else if (this.scort >= 60) {
+							finalmessage = '及格'
+						} else {
+							finalmessage = '不及格'
+						}
+						return finalmessage
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

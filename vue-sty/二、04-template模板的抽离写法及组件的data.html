@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<cpn1></cpn1>
+			<cpn2></cpn2>
+		</div>
+<!-- 01. script -->
+<!-- <script type="text/x-template" id="cpn1">
+  <div>
+    <h2>这是标题1</h2>
+  	<p>这是内容1</p>
+  </div>
+</script> -->
+
+<!-- 02. template  template如果包含多个元素,必须要有一个根,所以里面必须要有一层div -->
+<template id="cpn1">
+	<div>
+		<!-- 组件里面的title -->
+	  <h2>{{title}}</h2>
+		<p>{{content}}</p>
+	</div>
+</template>
+<!-- template抽离出来 ID一一对应 -->
+<template id="cpn2">
+	<div>
+	  <h2>{{title}}</h2>
+		<p>这是内容2</p>
+	</div>
+</template>
+
+
+		<script>
+		//语法糖（全局组件）  key:value (con1:template)
+		Vue.component('cpn1',{
+			  template:'#cpn1', //找ID为cpn1的templ
+				data(){// 组件要存放自己的数据,必须使用data()函数,并且需要return一个对象
+					return{
+						title:'this is title',
+						content:'this is content'
+					}
+				}
+				
+		 })
+		 //局部组件
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message: 'Hello Vue!'
+				},
+				components: {
+				  cpn2:{
+						template: '#cpn2',
+						data(){// 组件要存放数据,必须使用data()函数,并且需要return一个对象
+							return{
+								title:'这是标题2',
+								
+							}
+						}
+			  	}
+				}
+			})
+		</script>
+	</body>
+</html>

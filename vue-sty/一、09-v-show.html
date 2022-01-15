@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h2 id="001" v-if="isShow">{{ message }}</h2>
+			<h2 id="002" v-show="isShow">{{ message }}</h2>
+		</div>
+		<p>v-if 当条件为false时,包好v-if指定的元素不会存在于dom中.(将元素从dom中删除和增加的过程)</p>
+		<p>v-show 当条件为false时, 只是给元素增加了样式display:none.(true是display:block)</p>
+		<h3>显示和隐藏切花的频率很高时,用v-show.如果只有一次切换,用v-if.(实际开发中v-if会用的比较多)</h3>
+
+		<script>
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message: 'Hello Vue!',
+					isShow: true
+				}
+			})
+		</script>
+	</body>
+</html>

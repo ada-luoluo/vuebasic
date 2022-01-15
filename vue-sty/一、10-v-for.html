@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			.active {
+				color: #ff0000;
+			}
+
+			li {
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- v-for="item in infolist"里面的item是变量名字,可以随便取  v-for="变量 in 列表"  -->
+
+		<h1>遍历数组</h1>
+
+		<h4>遍历数组</h4>
+		<div id="app">
+			<ul>
+				<li v-for="item in infolist">
+					{{item}}
+				</li>
+			</ul>
+		</div>
+
+		<h4>遍历数组和下标</h4>
+		<div id="app2">
+			<ul>
+				<li v-for="(item,index) in infolist">
+					{{index + 1}} . {{item}}
+				</li>
+			</ul>
+			<!-- 加(item, index) index拿下标-->
+		</div>
+
+		<h1>遍历对象</h1>
+
+		<div id="app3">
+			<h4>1.遍历对象如果只获取取一个值的话,这个值就是value</h4>
+			<ul>
+				<li v-for="item in bascinfo" :key="item">
+					{{item}}
+				</li>
+				<!--key不能瞎定义,要与里面的元素对应.key和item 一一对应,并且保持key的唯一性,如果不能保持唯一性,就不要加key-->
+			</ul>
+			<h4>2.获取value和key[value比较重要,所以value在前面],格式:(value, key)</h4>
+			<ul>
+				<li v-for="(value, key) in bascinfo">
+					{{key}}: {{value}}
+				</li>
+			</ul>
+			<h4>2.获取value和key和下标,格式:(value, key, index)</h4>
+			<ul>
+				<li v-for="(value, key, index) in bascinfo">
+					{{index + 1}}. {{key}}: {{value}}
+				</li>
+			</ul>
+		</div>
+
+
+
+
+		<script>
+			const app = new Vue({
+				el: "#app",
+				data: {
+					infolist: ['info-1', 'info-2', 'info-3', 'info-4', 'info-5'],
+				}
+			})
+
+			const app2 = new Vue({
+				el: "#app2",
+				data: {
+					infolist: ['info-1', 'info-2', 'info-3', 'info-4', 'info-5'],
+
+				}
+			})
+
+
+			const app3 = new Vue({
+				el: "#app3",
+				data: {
+					bascinfo: {
+						name: 'aaa',
+						age: 14
+					}
+
+				}
+			})
+		</script>
+
+
+
+
+	</body>
+</html>

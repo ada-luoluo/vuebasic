@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+		  {{ message }}
+		</div>
+		
+		<div id="app-2">
+		  <span v-bind:title="message">
+		    鼠标悬停几秒钟查看此处动态绑定的提示信息！
+		  </span>
+		</div>
+		
+	<script>
+	// let(变量)  const(常量)   vue 传参为对象  声明式编程
+	   //const app = new Vue 
+		var app = new Vue({
+		  el: '#app', // vue管理id, 用于挂载管理元素
+		  data: {  //定于数据
+		    message: 'Hello Vue!'
+		  }
+		})
+		// console   APP.message == Hello Vue!
+		
+		
+		var app2 = new Vue({
+		  el: '#app-2',
+		  data: {
+		    message: '页面加载于 ' + new Date().toLocaleString()
+		  }
+		})
+	</script>
+	</body>
+</html>

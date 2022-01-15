@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<cpn></cpn>
+			<cpn ref="aaa"></cpn> 
+		  <!--  ref='aaa'   aaa就是key (key:value)  key可随便命名 -->
+			<br />
+			<button @click="btnclick">按钮</button>
+		</div>
+		<template id="cpn">
+			<div>
+				我是子组件
+			</div>
+		</template>
+
+		<script>
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message: 'Hello Vue!'
+				},
+				methods: {
+					btnclick() {
+
+						//01. $children  拿全部的数字时会用到,用得少
+						//	console.log(this.$children)//$children 返回的是数组,因为不可能只有一个子组件,所以是数组的形式
+						//this.$children[0].showmessage(); //拿某一个具体小标的
+						//this.$children[0].name;
+						// for (let c of this.$children) {
+						//  	  console.log(c.name);
+						// 		c.showmessage();
+						// }
+						
+						
+						//02. refs 开发中用的非常多  默认是一个空的对象 必须在组件中加ref='(key)' ,使用时 $refs.aaa.xxx  (key:value) 
+						console.log(this.$refs) // 返回的是一个空的对象
+         	 console.log(this.$refs.aaa)
+					 console.log(this.$refs.aaa.name)
+
+					}
+				},
+				components: {
+					cpn: {
+						template: '#cpn',
+						data() {
+							return {
+								name: '我是子组件的name'
+							}
+						},
+						methods: {
+							showmessage() {
+								console.log('子组件的methods中的showmessage')
+							}
+						}
+
+					},
+
+				}
+			})
+		</script>
+	</body>
+</html>

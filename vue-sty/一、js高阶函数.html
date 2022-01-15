@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+		<style>
+
+		</style>
+	</head>
+	<body>
+
+		<h2>高阶函数 filter/map/reduce的使用</h2>
+		<h4>filter函数</h4>
+		<p> 使用filter,filter中的函数，必须返回boolean值。<br>
+			为true时，函数内部会自动将这次回调的n 加入新的数组。<br>
+			为false时，函数会自动过滤掉这次n</p>
+
+		<script>
+			const nums = [11, 222, 333, 6, 555, 101, 99]
+
+
+			let newnum = nums.filter(function(n) { //newnum用来接收新的数组
+				return n < 100 // 每次遍历，对比数字，如果数字<100，则为true，就返回，然后保存到新数组
+			})
+			console.log(newnum)
+			//需求取出所有小于100的数字
+			//将N回调自动保存到新的数组 newnum
+
+			// map函数
+			let new2num = newnum.map(function(n) { //这里会遍历3次：11, 6, 99.同上每次遍历得到的数字*2，保存到新数组
+				return n * 2
+			})
+			console.log(new2num)
+			// 将小于100的数字都乘以2
+
+			//reduce函数，将所有结果汇总，要传2个参数
+
+			// let totoal = new2num.reduce(function(prevalue, n){
+			// 	// return 100 //这个表示prevalue，prevalue是保存的上一个值，这里是固定100
+			// 	return prevalue + n
+			// },0) //这个0，表示prevalue的初始值是0
+			//console.log(totoal) // 最后一次遍历的值，所有值的汇总相加
+			//现在数组(new2num)中n分别是：22,12, 198. reduce就要遍历3次
+			// 遍历：固定100
+			// 第一次：prevalue是0，n是22
+			// 第二次：prevalue是100，n是12
+			// 第三次：prevalue是100，n是198		
+			// 遍历：prevalue + n
+			// 第一次：prevalue是0+22，n是22
+			// 第二次：prevalue是22+12，n是12
+			// 第三次：prevalue是34+198，n是198		
+
+			//高阶函数汇总写法(函数式变成)
+
+			// let totoal = nums.filter(function(n){
+			// 	 return n < 100
+			// }).map(function(n){
+			// 	 return n * 2
+			// }).reduce(function(prevalue, n){
+			// 	 return prevalue + n
+			// })
+			// console.log(totoal)
+
+			// 更简洁的写法  箭头函数
+			let total = nums.filter(n => n < 100).map(n => n * 2).reduce((prevalue, n) => prevalue + n);
+			console.log(
+				total)
+		</script>
+
+
+
+	</body>
+</html>

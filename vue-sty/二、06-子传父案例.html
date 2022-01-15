@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<cpn @addcz="changetotal" @subcz="changetotal"></cpn>
+			<h2>点击次数{{total}}</h2>
+		</div>
+
+		<template id="app2">
+			<div>
+				<h2>当前数量:{{counter}}</h2>
+				<button @click="add">+</button>
+				<button @click="sub">-</button>
+			</div>
+		</template>
+
+		<script>
+			const cpn = {
+				template: '#app2',
+				data() {
+					return {
+						counter: 0
+					}
+				},
+				methods: {
+					add() {
+						this.counter++
+						this.$emit('addcz', this.counter)
+					},
+					sub() {
+						this.counter--
+						this.$emit('subcz', this.counter)
+					},
+
+				}
+			}
+
+
+			var app = new Vue({
+				el: '#app',
+				data: {
+					total: 0
+				},
+				components: {
+					cpn
+				},
+				methods: {
+					changetotal(counter) {
+						this.total = counter
+						console.log('点击总数',counter)
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

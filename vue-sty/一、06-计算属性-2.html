@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+
+			<!-- 计算属性  computed 计算属性 把fullName当做属性去使用,不需要()-->
+			<h3>{{fullName}}</h3>
+
+		</div>
+
+		<script>
+			// 计算属性基本操作
+			var app = new Vue({
+				el: '#app',
+				data: {
+					firstName: 'Domoto',
+					lastName: 'Tsuyoshi'
+				},
+				computed: {
+					// 最终简洁写法
+					fullName: function(){
+						return this.firstName + ' ' + this.lastName
+					},
+					
+					// 计算属性的本质 (形参和实参  把get返回的数据 当做实参传给data,然后修改data的内容)
+					// fullName: {
+					// 	set: function(newValue) {
+					// 		// set方法如果要实现必须带参数 newValue
+					// 		const names = newValue.split(' ');
+					// 		// split()对字符串进行分割,得到数组
+					// 		this.firstName = names[0];
+					// 		this.lastName = names[1];
+					// 	},
+					// 	get: function() {
+					// 		return this.firstName + ' ' + this.lastName
+					// 	}
+					// }
+					// 以上是完整写法, 有完整的set和get,但是99%set方法都不写,只读
+				},
+			})
+		</script>
+	</body>
+</html>

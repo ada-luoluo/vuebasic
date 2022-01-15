@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 01.mustache -->
+			<p>方法1.mustache</p>
+			<h3>{{firstName + ' ' + lastName}}</h3>
+			<!--02. methods -->
+			<p>方法2.methods</p>
+			<h3>{{getfullName()}}</h3>
+			<h3>{{getfullName()}}</h3>
+			<h3>{{getfullName()}}</h3>
+
+			<!-- 03.计算属性  computed 计算属性 把fullName当做属性去使用,不需要()-->
+			<p>方法3.计算属性</p>
+			<h3>{{fullName}}</h3>
+			<h3>{{fullName}}</h3>
+			<h3>{{fullName}}</h3>
+			
+			
+			<p>tips:如果多次调用的话,计算属性内部有缓存,只调用一次,可看打印结果.更多的选择计算属性</p>
+		
+			
+		</div>
+
+		<script>
+			// 
+			const app = new Vue({
+				el: '#app',
+				data: {
+					firstName: 'Domoto',
+					lastName: 'Tsuyoshi'
+				},
+				computed: {
+					fullName: function() {
+						console.log('fullName')
+						return this.firstName + ' ' + this.lastName
+					}
+				},
+
+				methods: {
+					getfullName: function() {
+						console.log('getfullName')
+						return this.firstName + ' ' + this.lastName
+					},
+
+				}
+			})
+		</script>
+	</body>
+</html>

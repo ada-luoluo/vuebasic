@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+
+		<h1>v-model与表单</h1>
+		<p>Vue实现双向绑定的原理<br>
+			通过v-bind把message动态绑定到input的value。在通过v-on的change方法，把input的value，传给message</p>
+
+		<div id="app">
+			<h3>原理写法</h3>
+			<input type="text" v-bind:value="message" v-on:input="changvalue" />
+
+			<h3>语法糖写法</h3>
+			<input type="text" :value="message" @input="changvalue" />
+
+			<h3>表达式写法</h3>
+			<input type="text" :value="message" @input="message = $event.target.value" />
+
+			<h3>v-modle写法 一般都用v-modle</h3>
+			<input type="text" v-model="message" />
+			<h2>{{ message }}</h2>
+			<br />
+
+			<h2>v-modle与radio</h2>
+			<div>
+				<!-- radio name相同的话为互斥，只有一个被选中 -->
+				<!-- <input type="radio" id="male" value="男" name="sex" /> 男 -->
+				<!-- 单选时，使用v-model里面的key一样时，也是互斥的，所以可省略name -->
+				<input type="radio" id="male" value="男" v-model="sex" /> 男
+				<input type="radio" id="female" value="女" v-model="sex" /> 女
+				<h4>您的选择是：{{sex}}</h4>
+			</div>
+			<br />
+
+			<h2>v-modle与checkbox</h2>
+			<p>1.单选框</p>
+			<label for="agress">
+				<input type="checkbox" id="agress" v-model="isAgress">同意协议
+			</label>
+			<h3>您的选择是：{{isAgress}}</h3>
+			<button :disabled="!isAgress">下一步</button>
+			<!-- 取反 为true时，按钮可点击 -->
+			<p>2.多选框</p>
+			<input type="checkbox" value="篮球" v-model="hobbies" /> 篮球
+			<input type="checkbox" value="足球" v-model="hobbies" /> 足球
+			<input type="checkbox" value="排球" v-model="hobbies" /> 排球
+			<p>您的爱好是：{{hobbies}}</p>
+			<br />
+			<h2>v-modle与select</h2>
+			<p>1.select下拉单选</p>
+			<select name="aaa" v-model="friuts">
+				<option value="苹果">苹果</option>
+				<option value="梨子">梨子</option>
+				<option value="香蕉">香蕉</option>
+			</select>
+			<p>您选择的水果是：{{friuts}}</p>
+			<br />
+			<p>2.select下拉多选</p>
+			<select name="aaa" v-model="manyfriuts" multiple>
+				<option value="苹果">苹果</option>
+				<option value="梨子">梨子</option>
+				<option value="香蕉">香蕉</option>
+			</select>
+			<p>您选择的水果是：{{manyfriuts}}</p>
+
+			<h1>值绑定</h1>
+			<p>值不是写死的，而是从服务器返回的</p>
+
+			<label v-for="item in otherfriuts" :for="item">
+				<input type="checkbox" :value="item" :id="item" v-model="otherfriuts" />{{item}}
+			</label>
+			<h3>您喜欢的其他水果是：{{otherfriuts}}</h3>
+
+
+		</div>
+
+
+		<script>
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message: 'Hello Vue!',
+					sex: '男', //如果需要默认项，可以给sex赋值
+					isAgress: false, //单选按钮，为boolean值
+					hobbies: [], //多选按钮为数组
+					friuts: '香蕉', //select下拉单选
+					manyfriuts: [], //select都选是数组形式
+					otherfriuts: ['apple', 'banana', 'momo', 'ichigo']
+
+
+				},
+				methods: {
+					changvalue(event) {
+						this.message = event.target.value
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

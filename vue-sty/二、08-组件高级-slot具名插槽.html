@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+
+		<div id="app">
+			<cpn>
+				<span slot="left">aaa</span>
+				<button slot="right">bbb</button>
+			</cpn>
+		</div>
+		<template id="cpn">
+			<div>
+				<slot name="left">左边</slot>
+				<slot name="center">中间</slot>
+				<slot name="right">右边</slot>
+			</div>
+		</template>
+		
+		<h2>slot具名插槽:</h2>
+		<p>组件中给slot定义名字,在cpn中使用的时候, 给个相应的slot name 告诉代码要修改哪个插槽的内容</p>
+
+		<script>
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message: 'Hello Vue!'
+				},
+				components: {
+					cpn: {
+						template: '#cpn',
+					}
+
+				}
+			})
+		</script>
+	</body>
+</html>

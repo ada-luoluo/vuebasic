@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			.active {
+				color: #ff0000;
+			}
+
+			.other {
+				color: #0000FF;
+			}
+		</style>
+
+
+	</head>
+	<body>
+
+		<!-- v-bind  动态绑定属性  属性前加上v-bind-->
+		<!-- 把从服务器请求来的数据放到data里面-->
+		<!-- v-bind的简写 ":"-->
+		<div id="app">
+			<img v-bind:src="imgURL">
+			<h2><a v-bind:href="links">链接</a></h2>
+			<h3>
+				<a :href="links">另外一个写法(链接)</a>
+			</h3>
+
+			<!-- v-bind  动态绑定class   例如list中li 点击之后的li会有active-->
+			<div :class="active">
+				<h2>{{message}}</h2>
+			</div>
+
+			<!-- v-bind中class可绑定对象用"{}", {类名1:boolean, 类名2:boolean}  boolean为true或者false -->
+			<div :class="{active:false, other:true}">
+				<!-- 这里other是true,所以最终显示clas="other" -->
+				<h2>{{message}}</h2>
+			</div>
+
+			<!-- 通过变量来决定是否添加class  可以动态绑定class, 也可以用固定的class,他们会自动合并在一起-->
+			<div class="orgclass" :class="{active:activetest, other:othertest}">
+				<!-- boolean的命名通常会放到data里面 -->
+				<h2>{{message}} <button @click="chang()">click change color</button></h2>
+			</div>
+
+			<div v-bind:class="getclasses()">
+				<h2>{{message}} <button @click="chang()">click change color</button></h2>
+			</div>
+		</div>
+
+		<!-- 	绑定数组 -->
+		<div id="app2">
+			<h1 class="org" :class="['kuai', 'line']">{{newmessages}}</h1>
+			<!-- 加上'' 就是字符串, 没有就是变量-->
+			<h1 class="org" :class="[kuai, line]">{{newmessages}}</h1>
+			<h1 class="org" :class="getclass()">{{newmessages}}</h1>
+		</div>
+
+
+
+
+		<script>
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message: 'Hello Vue!',
+					imgURL: "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2F81%2Fec%2F83%2F81ec83ecc6c8d5c3574a11731b6cd2f7.png&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1642659846&t=b02f544e8df3f80c17aa5a9cf5123884",
+					links: "http://news.baidu.com/",
+					active: "active",
+					activetest: true,
+					othertest: false
+				},
+				methods: {
+					chang: function() {
+						// this.othertest = true  只改变了一次颜色
+						this.othertest = !this.othertest
+						// 原值取反,每次点击都可改变颜色
+					},
+					getclasses: function() {
+						return {
+							org: this.activetest,
+							other: this.othertest
+						}
+					}
+				}
+			})
+
+			var app2 = new Vue({
+				el: '#app2',
+				data: {
+					newmessages: '新消息',
+					kuai: 'kuai-aa',
+					line: 'line-aa'
+				},
+				methods: {
+					getclass: function() {
+						return [this.kuai, this.line]
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

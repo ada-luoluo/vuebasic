@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>查看多个请求结果</h2>
+
+<script>
+//用settimeout模拟网可以请求  Promise.all查看多个请求结果,以数组展示
+Promise.all([
+  new Promise((resolve, reject) =>{
+      setTimeout(() =>{
+          resolve({name: 'aaa', age: 18})
+      },2000)
+  }),
+    new Promise((resolve, reject) =>{
+        setTimeout(() =>{
+            resolve({name: 'bbb', age: 19})
+        },1000)
+    })
+]).then(res => {
+    console.log(res)
+})
+
+
+</script>
+</body>
+</html>

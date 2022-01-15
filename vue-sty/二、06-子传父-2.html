@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<!-- 父组件 -->
+		<div id="app">
+			<!-- 这里的cpnclick不要()!!!!! -->
+			<cpn @itemclick="cpnclick"></cpn> 
+		</div>
+
+		<!-- 子组件 -->
+		<template id="cpn">
+			<div>
+      <!-- 发射item的ID  item.id  -->
+				<button v-for="item in categories" @click="btnclick(item.id)">
+					{{item.name}}
+				</button>
+
+			</div>
+		</template>
+
+		<script>
+			//子组件
+			const cpn = {
+				template: '#cpn',
+				data() {
+					return {
+						categories: [{
+								id: '1',
+								name: '分类一'
+							},
+							{
+								id: '2',
+								name: '分类二'
+							},
+							{
+								id: '3',
+								name: '分类三'
+							}
+						]
+					}
+				},
+				methods: {
+					btnclick(item) { //子组件的item点击  
+						//子组件 $emit发射事件:发射事件的类型为自定义  将id发射传给父组件
+						this.$emit('itemclick', item)
+						console.log(item) //这里的item = item.ID
+					}
+				}
+			}
+
+			//父组件
+			const app = new Vue({
+				el: '#app',
+				data: {
+					message: 'Hello Vue!'
+				},
+				components: {
+					cpn
+				},
+				methods: {
+					//子组件发射事件后,父组件监听这个事件
+					cpnclick(item) {
+						console.log('接收到了', item)
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

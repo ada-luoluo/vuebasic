@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			.active {
+				color: #ff0000;
+			}
+
+			.other {
+				color: #0000FF;
+				background-color: #000000;
+			}
+		</style>
+
+
+	</head>
+	<body>
+
+		<!-- 绑定样式 -->
+		<div id="app">
+			<h2>{{message}}</h2>
+			<!-- value(属性值) 要加上单引号,多个样式用,隔开 -->
+			<!-- <h2 :style="{key(css的属性名): value(属性值)}">{{message}}</h2> -->
+			<h2 :style="{fontSize: '18px', color: '#ff0000'}">{{message}}</h2>
+
+			<!-- 变量 直接使用   font-size或者fontSize都可以-->
+			<h2 :style="{fontSize: bigsize}">{{message}}</h2>
+			<h2 :style="{fontSize: othersize + 'px', color:othercolor}">{{message}}</h2>
+			<h2 :style="getstyle()">{{message}}</h2>
+			<!-- 如果内容太长,可使用function -->
+
+
+			<!-- 绑定样式 数组语法 -->
+			<h2 :style="[basestyle,basestyle1]">{{message}}</h2>
+
+
+		</div>
+
+		<script>
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message: 'Hello Vue!',
+					bigsize: '100px',
+					othersize: 150,
+					othercolor: '#999',
+					basestyle: {fontSize: '55px', color:"#fff"},
+					basestyle1: {backgroundColor: '#000000'}
+				},
+				methods: {
+					getstyle: function() {
+						return {
+							fontSize: this.othersize + 'px',
+							color: this.othercolor
+						}
+					}
+				}
+
+			})
+		</script>
+	</body>
+</html>
